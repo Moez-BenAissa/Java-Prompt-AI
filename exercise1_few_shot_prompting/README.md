@@ -39,28 +39,34 @@ Possible example:
 
 Now it's your turn to integrate your prompt below: 👀
 ```java
-Generate a java method named isPalindrome that take a string as input parameter and return true is start with voyel else false
+Generate a java method named isPalindrome
 ```
 
 What was the response?
 ```java
-public class StringChecker {
-    public static boolean isPalindrome(String input) {
-        if (input == null || input.isEmpty()) {
-            return false; // Return false for null or empty strings
+public class PalindromeChecker {
+    public static boolean isPalindrome(String str) {
+        if (str == null) return false;
+        str = str.toLowerCase().replaceAll("[^a-zA-Z0-9]", ""); // Normalize input
+
+        int left = 0, right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
         }
-        
-        char firstChar = Character.toLowerCase(input.charAt(0));
-        return "aeiou".indexOf(firstChar) != -1;
+        return true;
     }
 
     public static void main(String[] args) {
-        System.out.println(isPalindrome("apple"));  // Output: true
-        System.out.println(isPalindrome("banana")); // Output: false
-        System.out.println(isPalindrome("Orange")); // Output: true
-        System.out.println(isPalindrome("grape"));  // Output: false
+        System.out.println(isPalindrome("radar"));    // true
+        System.out.println(isPalindrome("hello"));    // false
+        System.out.println(isPalindrome("A man, a plan, a canal, Panama")); // true
     }
 }
+
 
 ```
 
