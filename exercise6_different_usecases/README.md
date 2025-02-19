@@ -16,12 +16,51 @@ public static int divide(int a, String b) {
 
 Now it's yoNow it's your turn to integrate your prompt below: 👀
 ```java
-Write your prompt here
+is it a valid code 
+[code]
 ```
 
 What was the response?
 ```java
-Write AI response here
+ Syntax & Compilation Errors
+Type mismatch:
+
+The method attempts to divide an int by a String (a / b), which is not allowed in Java. Division requires numeric types (int, double, etc.).
+Duplicate variable declaration:
+
+int result is declared twice:
+java
+Copier
+Modifier
+int result = a / b;
+int result = 0;
+This causes a "variable is already defined" compilation error.
+Unused result of division:
+
+Even if the division were correct, the calculated result is overwritten by int result = 0;, making the division pointless.
+✅ Corrected Code
+If you intended to parse b as an integer before performing the division, a correct version would be:
+
+java
+Copier
+Modifier
+public static int divide(int a, String b) {
+    try {
+        int numB = Integer.parseInt(b); // Convert String to int
+        return a / numB; // Perform division
+    } catch (NumberFormatException e) {
+        throw new IllegalArgumentException("Invalid number format: " + b);
+    } catch (ArithmeticException e) {
+        throw new ArithmeticException("Division by zero is not allowed.");
+    }
+}
+🛠 Fixes & Enhancements
+✅ Parses String b safely
+✅ Handles invalid number format ("abc" as input)
+✅ Prevents division by zero
+✅ Returns correct result
+
+Would you like JUnit tests for this method? 🚀
 ```
 
 ## Use Case 2: Optimize code
@@ -37,12 +76,30 @@ public static int divide(int a, int b) {
 
 Now it's your turn to integrate your prompt below: 👀
 ```java
-Write your prompt here
+can you optimise the code
 ```
 
 What was the response?
 ```java
-Write AI response here
+public static int divide(int a, String b) {
+    if (b == null || b.isBlank()) {
+        throw new IllegalArgumentException("Input cannot be null or empty.");
+    }
+
+    int numB;
+    try {
+        numB = Integer.parseInt(b.trim()); // Trim spaces & parse
+    } catch (NumberFormatException e) {
+        throw new IllegalArgumentException("Invalid number format: " + b);
+    }
+
+    if (numB == 0) {
+        throw new ArithmeticException("Division by zero is not allowed.");
+    }
+
+    return a / numB;
+}
+
 ```
 
 ## Use Case 3: Reverse engineering
@@ -100,10 +157,18 @@ Possible example:
 
 Now it's your turn to integrate your prompt below: 👀
 ```java
-Write your prompt here
+can you explain the folowing regex dose and compare : 
+^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$
 ```
 
 What was the response?
 ```java
-Write AI response here
+Regex Part	Explanation
+^	Start of the string
+[\w\.=-]+	Matches one or more (+) word characters (\w = [a-zA-Z0-9_]), dots (.), equals (=), and hyphens (-) before @
+@	Matches the @ symbol (required in an email)
+[\w\.-]+	Matches the domain name: one or more word characters (\w), dots (.), and hyphens (-)
+\.	Matches a dot (.) before the domain extension
+[\w]{2,3}	Matches 2 to 3 word characters (letters or numbers) for the TLD (e.g., "com", "net", "org")
+$	End of the string
 ```
