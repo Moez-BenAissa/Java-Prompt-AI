@@ -11,12 +11,22 @@ Possible example:
 
 Now it's your turn to integrate your prompt below: 👀
 ```java
-Write your prompt here
+Generate a method in java having a number as input param and return odd if it is odd or even of it is even
 ```
 
 What was the response?
 ```java
-Write AI response here
+public class NumberChecker {
+    public static String checkOddOrEven(int number) {
+        return (number % 2 == 0) ? "Even" : "Odd";
+    }
+
+    public static void main(String[] args) {
+        System.out.println(checkOddOrEven(5)); // Output: Odd
+        System.out.println(checkOddOrEven(8)); // Output: Even
+    }
+}
+
 ```
 
 ## 2️⃣ Use Case 2: Create a New Prompt for the Model to Generate a Java method with a Specific Response Structure
@@ -29,12 +39,29 @@ Possible example:
 
 Now it's your turn to integrate your prompt below: 👀
 ```java
-Write your prompt here
+Generate a java method named isPalindrome that take a string as input parameter and return true is start with voyel else false
 ```
 
 What was the response?
 ```java
-Write AI response here
+public class StringChecker {
+    public static boolean isPalindrome(String input) {
+        if (input == null || input.isEmpty()) {
+            return false; // Return false for null or empty strings
+        }
+        
+        char firstChar = Character.toLowerCase(input.charAt(0));
+        return "aeiou".indexOf(firstChar) != -1;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isPalindrome("apple"));  // Output: true
+        System.out.println(isPalindrome("banana")); // Output: false
+        System.out.println(isPalindrome("Orange")); // Output: true
+        System.out.println(isPalindrome("grape"));  // Output: false
+    }
+}
+
 ```
 
 ## 3️⃣ Use Case 3: Compare Your Two Responses and Test Other Response Structures
